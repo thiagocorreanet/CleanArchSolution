@@ -1,11 +1,12 @@
 ﻿using Core.Auth;
 
+using Microsoft.AspNetCore.Identity;
+
 namespace Core.Repositories;
 
 public interface IAuthRepository
 {
-    Task<LoginUser> AuthenticateAsync(string username, string password);
-    Task<bool> RegisterUserAsync(string userName, string password);
+    Task<SignInResult?> AuthenticateAsync(string username, string password, CancellationToken cancellationToken);
+    Task<IdentityResult> RegisterUserAsync(string userName, string password, CancellationToken cancellationToken);
     Task LogoutAsync();
-    Task<LoginUser> GenerateJwtTokenAsync(string userName);
 }
